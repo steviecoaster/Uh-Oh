@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>uh-oh</id>
+    <version>[[VERSION]]</version>
+    <packageSourceUrl>https://github.com/steviecoaster/Uh-Oh</packageSourceUrl>
+    <owners>steviecoaster</owners>
+    <title>uh-oh (Install)</title>
+    <authors>steviecoaster</authors>
+    <projectUrl>https://github.com/steviecoaster/Uh-Oh</projectUrl>
+    <copyright>2020</copyright>
+    <licenseUrl>https://raw.githubusercontent.com/steviecoaster/Uh-Oh/main/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/steviecoaster/Uh-Oh</projectSourceUrl>
+    <docsUrl>https://github.com/steviecoaster/Uh-Oh/tree/main/docs</docsUrl>
+    <bugTrackerUrl>https://github.com/steviecoaster/Uh-Oh/issues</bugTrackerUrl>
+    <tags>uh-oh powershell status staytus alert monitoring monitor alerting</tags>
+    <summary>Uh-Oh: The PowerShell module for Staytus!/summary>
+    <description># Uh-Oh: The PowerShell module for Staytus!
+
+[Staytus](http://staytus.co/) is an awesome open-source status page software for notifying stakeholders of outages for services you provide.
+
+Print Server gone on the fritz? Database corrupted? Web site throwin' a wobbler? Staytus allows you to quickly post incident updates to a nice WebUI enabling visibility into service degradation issues to your users.
+
+</description>
+<dependencies>
+      <dependency id="powershell-core" version="7.0.0" />
+</dependencies>
+  </metadata>
+  <files>
+    <!-- this section controls what actually gets packaged into the Chocolatey package -->
+    <file src="tools\**" target="tools" />
+    <!--Building from Linux? You may need this instead: <file src="tools/**" target="tools" />-->
+  </files>
+</package>
