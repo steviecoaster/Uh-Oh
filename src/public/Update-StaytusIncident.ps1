@@ -1,4 +1,29 @@
 Function Update-StaytusIncident {
+    <#
+    .SYNOPSIS
+    Updates an Incident in Staytus
+    
+    .DESCRIPTION
+    Updates an Incident in Staytus
+    
+    .PARAMETER Incident
+    The Incident to update
+    
+    .PARAMETER Update
+    Provide a brief update about the incident
+    
+    .PARAMETER Status
+    Update status if needed
+    
+    .PARAMETER State
+    Update state if needed
+    
+    .PARAMETER NotifySubscribers
+    Send an email to subscribers
+    
+    .EXAMPLE
+    Update-StaytusIncident -Incident 'Website loading times degraded' -Update 'Still investigating'
+    #>
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory)]
