@@ -28,10 +28,10 @@ process {
         $Build {
 
             Get-ChildItem $root\src\public\*.ps1 | Foreach-Object { 
-                Get-Content $_.FullName | Add-Content "$root\src\Uh-Oh.psm1"
+                Get-Content $_.FullName | Add-Content "$root\Output\Uh-Oh\Uh-Oh.psm1"
             }
 
-            Copy-Item $root\src\*.psd1,$root\src\*.psm1 -Destination "$root\Output\Uh-Oh"
+            Copy-Item $root\src\*.psd1 -Destination "$root\Output\Uh-Oh"
         }
         $Test {}
         $Deploy {}
