@@ -24,7 +24,7 @@ Function Update-StaytusIncident {
     .EXAMPLE
     Update-StaytusIncident -Incident 'Website loading times degraded' -Update 'Still investigating'
     #>
-    [CmdletBinding()]
+    [CmdletBinding(HelpUri="https://github.com/steviecoaster/Uh-Oh/blob/main/docs/Update-StaytusIncident.md")]
     Param(
         [Parameter(Mandatory)]
         [Argumentcompleter(

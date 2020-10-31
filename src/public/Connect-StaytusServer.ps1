@@ -27,7 +27,7 @@ Function Connect-StaytusServer {
     .NOTES
     General notes
     #>
-    [cmdletBinding()]
+    [cmdletBinding(HelpUri="https://github.com/steviecoaster/Uh-Oh/blob/main/docs/Connect-StaytusServer.md")]
     Param(
         [Parameter(Mandatory)]
         [Alias('Hostname')]

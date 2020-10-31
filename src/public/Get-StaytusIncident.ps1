@@ -34,7 +34,7 @@ function Get-StaytusIncident {
     Get-StaytusIncident -Credential $credential -State Identified,Investigating
         
     #>
-    [CmdletBinding(DefaultParameterSetName='Credential')]
+    [CmdletBinding(DefaultParameterSetName='Credential',HelpUri="https://github.com/steviecoaster/Uh-Oh/blob/main/docs/Get-StaytusIncident.md")]
     Param(
         [Parameter(ParameterSetName='Title')]
         [String[]]

@@ -47,7 +47,7 @@ Function New-StaytusIncident {
     New-StaytusIncident @incidentParams
 
     #>
-    [CmdletBinding()]
+    [CmdletBinding(HelpUri="https://github.com/steviecoaster/Uh-Oh/blob/main/docs/New-StaytusIncident.md")]
     Param(
 
         [Parameter(Mandatory)]
