@@ -55,7 +55,7 @@ process {
         }
         $Test {
 
-            Import-Module $root\Output\Uh-Oh\Uh-Oh.psd1
+            Import-Module (Get-ChildItem $root -Recurse -Filter *.psd1).FullName
             Get-Command -module Uh-Oh
         }
 
