@@ -14,7 +14,7 @@ Print Server gone on the fritz? Database corrupted? Web site throwin' a wobbler?
 git clone https://github.com/steviecoaster/Uh-Oh.git
 cd Uh-Oh
 ./build.ps1 -Build
-Import-Module ./Uh-Oh.psd1
+Import-Module ./Output/Uh-Oh/Uh-Oh.psd1
 ```
 
 ### PowerShell Gallery : COMING SOON
