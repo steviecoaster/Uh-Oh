@@ -16,7 +16,7 @@ Function Set-StaytusService {
     Set-StaytusService -Service 'Storefront' -Status operational
 
     #>
-    [cmdletBinding()]
+    [cmdletBinding(HelpUri = "https://github.com/steviecoaster/Uh-Oh/blob/main/docs/Get-StaytusService.md")]
     Param(
         [Parameter(Mandatory)]
         [ArgumentCompleter(

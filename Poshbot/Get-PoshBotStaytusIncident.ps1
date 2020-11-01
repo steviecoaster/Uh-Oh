@@ -26,7 +26,7 @@ function Get-PoshBotStaytusIncident {
     
     #>
     [PoshBot.BotCommand(CommandName = 'StaytusInfo')]
-    [CmdletBinding(HelpUri="https://github.com/steviecoaster/Uh-Oh/blob/main/docs/Get-PoshBotStaytusServer.md")]
+    [CmdletBinding(HelpUri="https://github.com/steviecoaster/Uh-Oh/blob/main/docs/Get-PoshBotStaytusIncident.md")]
     Param(
         [Parameter(ParameterSetName = 'Title')]
         [String[]]
