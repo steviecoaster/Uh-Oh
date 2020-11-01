@@ -25,10 +25,9 @@ process {
         Remove-Item "$root\Output\Uh-Oh\*.psm1" -Recurse -Force
     }
 
-    if (Test-Path "$root\src\nuget\tools\Uh-Oh.zip"){
+    if (Test-Path "$root\src\nuget\tools\Uh-Oh.zip") {
         Remove-Item "$root\src\nuget\tools\Uh-Oh.zip" -Force
     }
-
 
     switch ($true) {
 
@@ -43,15 +42,16 @@ process {
             [version]$version = $Manifest.ModuleVersion
             # Add one to the build of the version number
 
-            if(($Version.Build + 1) -eq 10){
+            if (($Version.Build + 1) -eq 10) {
                 [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, ($Version.Minor + 1), '0'
-            } else { [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, ($Version.Build + 1) }
+            }
+            else { [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, ($Version.Build + 1) }
             
             # Update the manifest file
             Update-ModuleManifest -Path "$root\Output\Uh-Oh\Uh-Oh.psd1" -ModuleVersion $NewVersion
 
             #Compress Module to zip file
-            Compress-Archive -Path "$root\Output\Uh-Oh\Uh-Oh.psd1","$root\Output\Uh-Oh\Uh-Oh.psm1" -DestinationPath "$root\src\nuget\tools\Uh-Oh.zip"
+            Compress-Archive -Path "$root\Output\Uh-Oh\Uh-Oh.psd1", "$root\Output\Uh-Oh\Uh-Oh.psm1" -DestinationPath "$root\src\nuget\tools\Uh-Oh.zip"
 
             #Publish pipeline artifacts
             #Copy-Item "$root\Output\" -Recurse -Destination $env:BuildArtifactStagingDirectory
