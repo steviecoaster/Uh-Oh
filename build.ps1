@@ -46,16 +46,22 @@ process {
             if(($Version.Build + 1) -eq 10){
                 [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, ($Version.Minor + 1), '0'
             } else { [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, ($Version.Build + 1) }
+            
             # Update the manifest file
             Update-ModuleManifest -Path "$root\Output\Uh-Oh\Uh-Oh.psd1" -ModuleVersion $NewVersion
 
             #Compress Module to zip file
             Compress-Archive -Path "$root\Output\Uh-Oh\Uh-Oh.psd1","$root\Output\Uh-Oh\Uh-Oh.psm1" -DestinationPath "$root\src\nuget\tools\Uh-Oh.zip"
 
+            #Publish pipeline artifacts
+            Copy-Item "$root\Output\" -Recurse -Destination $env:BuildArtifactStagingDirectory
         }
         $Test {
 
-            Import-Module (Get-ChildItem $root -Recurse -Filter *.psd1).FullName
+            Import-Module (Get-ChildItem $root -Recurse -Filter *.psd1).FullName -ErrorAction SilentlyContinue
+
+            $error[0].Exception.GetBaseException()
+            
             Get-Command -module Uh-Oh
         }
 
