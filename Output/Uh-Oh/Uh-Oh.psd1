@@ -12,7 +12,7 @@
 RootModule = '.\Uh-Oh.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.3'
+ModuleVersion = '0.1.4'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -71,7 +71,11 @@ Description = 'PowerShell API wrapper for the Staytus incident status web applic
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = 'Connect-StaytusServer', 'Get-StaytusIncident', 'New-StaytusIncident', 
                'Update-StaytusIncident', 'New-PoshBotStaytusIncident', 
-               'Connect-PoshBotStaytusServer', 'Get-PoshBotStaytusIncident'
+               'Connect-PoshBotStaytusServer', 'Get-PoshBotStaytusIncident', 
+               'Assert-StaytusSubscriber', 'Get-StaytusSubscriber', 
+               'New-StaytusSubscriber', 'Remove-StaytusSubscriber', 
+               'Send-StaytusVerificationEmail', 'Get-StaytusService', 
+               'Set-StaytusService'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'
