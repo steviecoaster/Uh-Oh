@@ -3,7 +3,7 @@ param(
     [Parameter()]
     [Switch]
     $PrepEnvironment,
-    
+
     [Parameter()]
     [Switch]
     $Build,
@@ -36,13 +36,16 @@ process {
     switch ($true) {
 
         $PrepEnvironment {
+            Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
             Install-Module PowerShellGet -SkipPublisherCheck -Force
             Import-Module PowerShellGet -MinimumVersion 2.2.3
 
         }
         $Build {
-
-            Get-ChildItem $root\src\public\*.ps1 | Foreach-Object { 
+            
+            $items = Get-ChildItem $root\src\public\*.ps1
+            $items
+            $items | Foreach-Object { 
                 Get-Content $_.FullName | Add-Content "$root\Output\Uh-Oh\Uh-Oh.psm1"
             }
             
@@ -80,7 +83,7 @@ process {
 
             (Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$version") | Set-Content "$($Nuspec.FullName)"
 
-            if(Test-Path "$root\src\nuget\tools\Uh-Oh.zip"){
+            if (Test-Path "$root\src\nuget\tools\Uh-Oh.zip") {
                 choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
             }
 
@@ -89,7 +92,7 @@ process {
             }
             Get-ChildItem "$root\src\nuget" -recurse -filter *.nupkg | 
             Foreach-Object { 
-               choco push $_.FullName -s https://push.chocolatey.org --api-key="'$($env:ChocoApiKey)'"
+                choco push $_.FullName -s https://push.chocolatey.org --api-key="'$($env:ChocoApiKey)'"
             }
 
         }
