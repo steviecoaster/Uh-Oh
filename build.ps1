@@ -72,7 +72,7 @@ process {
 
         $Choco {
             $manifest = Import-PowerShellDataFile "$root\Output\Uh-Oh\Uh-Oh.psd1"
-            [version]$version = $Manifest.ModuleVersion
+            $version = $Manifest.ModuleVersion
             $Nuspec = Get-ChildItem "$root\src\nuget" -recurse -filter *.nuspec
             (Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$Version") | Set-Content "$Nuspec"
 
