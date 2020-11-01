@@ -2,6 +2,10 @@
 param(
     [Parameter()]
     [Switch]
+    $PrepEnvironment,
+    
+    [Parameter()]
+    [Switch]
     $Build,
     
     [Parameter()]
