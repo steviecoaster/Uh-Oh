@@ -15,23 +15,17 @@ function Get-StaytusIncident {
     .PARAMETER State
     The State of the incident to look for
     
-    .PARAMETER Credential
-    The X-Auth-Token (username) and X-Auth-Secret (password) for your Staytus API user
-    
     .EXAMPLE
-    Get-StaytusIncident -Credential (Get-Credential)
+    Get-StaytusIncident
 
     .EXAMPLE
-    Get-StaytusIncident -Credential $credential
+    Get-StaytusIncident -Id 1,36,4
 
     .EXAMPLE
-    Get-StaytusIncident -Credential $credential -Id 1,36,4
+    Get-STaytusIncident -Title 'Website experiencing slow response','SQL Database degraded'
 
     .EXAMPLE
-    Get-STaytusIncident -Credential $credential -Title 'Website experiencing slow response','SQL Database degraded'
-
-    .EXAMPLE
-    Get-StaytusIncident -Credential $credential -State Identified,Investigating
+    Get-StaytusIncident -State Identified,Investigating
         
     #>
     [CmdletBinding(DefaultParameterSetName='Credential',HelpUri="https://github.com/steviecoaster/Uh-Oh/blob/main/docs/Get-StaytusIncident.md")]

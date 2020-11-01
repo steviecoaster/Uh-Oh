@@ -39,27 +39,22 @@ Returns detailed status information for incidents raised in your Staytus system
 
 ### EXAMPLE 1
 ```
-Get-StaytusIncident -Credential (Get-Credential)
+Get-StaytusIncident
 ```
 
 ### EXAMPLE 2
 ```
-Get-StaytusIncident -Credential $credential
+Get-StaytusIncident -Id 1,36,4
 ```
 
 ### EXAMPLE 3
 ```
-Get-StaytusIncident -Credential $credential -Id 1,36,4
+Get-STaytusIncident -Title 'Website experiencing slow response','SQL Database degraded'
 ```
 
 ### EXAMPLE 4
 ```
-Get-STaytusIncident -Credential $credential -Title 'Website experiencing slow response','SQL Database degraded'
-```
-
-### EXAMPLE 5
-```
-Get-StaytusIncident -Credential $credential -State Identified,Investigating
+Get-StaytusIncident -State Identified,Investigating
 ```
 
 ## PARAMETERS

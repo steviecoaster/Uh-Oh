@@ -6,9 +6,6 @@ Function New-StaytusIncident {
     .DESCRIPTION
     Post a new service incident to your Staytus instance
     
-    .PARAMETER StaytusServer
-    Your staytus server. If using non-standard port, pass hostname:port
-    
     .PARAMETER Title
     The incident Title
     
@@ -27,17 +24,13 @@ Function New-StaytusIncident {
     .PARAMETER UseSSL
     Use SSL in URI. If using non-standard HTTPS port, ensure 'hostname:port' format of StaytusServer is correct
     
-    .PARAMETER Credential
-    X-Auth-Token (username) and X-Auth-Secret (password) of Staytus API user
     
     .EXAMPLE
-    New-StaytusIncident -Credential $credential -StaytusServer 192.168.2.239:8787 -Title 'PowerShell Test' -Service Junk 
+    New-StaytusIncident -Title 'PowerShell Test' -Service Junk 
 -State Identified -Status major-outage
 
     .EXAMPLE
     $incidentParams = @{
-        Credential = $credential
-        StaytusServer = 192.168.2.239:8787
         Title = 'Well, that's not good. SQL is down!'
         Service = 'Sql Cluster'
         State = 'Identified'

@@ -24,15 +24,13 @@ Post a new service incident to your Staytus instance
 
 ### EXAMPLE 1
 ```
-New-StaytusIncident -Credential $credential -StaytusServer 192.168.2.239:8787 -Title 'PowerShell Test' -Service Junk 
+New-StaytusIncident -Title 'PowerShell Test' -Service Junk 
 -State Identified -Status major-outage
 ```
 
 ### EXAMPLE 2
 ```
 $incidentParams = @{
-    Credential = $credential
-    StaytusServer = 192.168.2.239:8787
     Title = 'Well, that's not good. SQL is down!'
     Service = 'Sql Cluster'
     State = 'Identified'

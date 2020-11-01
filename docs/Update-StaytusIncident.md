@@ -8,7 +8,7 @@ schema: 2.0.0
 # Update-StaytusIncident
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Updates an Incident in Staytus
 
 ## SYNTAX
 
@@ -18,83 +18,19 @@ Update-StaytusIncident [-Incident] <String> [-Update] <String> [[-Status] <Strin
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Updates an Incident in Staytus
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Update-StaytusIncident -Incident 'Website loading times degraded' -Update 'Still investigating'
+```
 
 ## PARAMETERS
 
 ### -Incident
-{{ Fill Incident Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -NotifySubscribers
-{{ Fill NotifySubscribers Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -State
-{{ Fill State Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Investigating, Identified, Monitoring, Resolved
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Status
-{{ Fill Status Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: major-outage, operational, degraded-performance, partial-outage, maintenance
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Update
-{{ Fill Update Description }}
+The Incident to update
 
 ```yaml
 Type: String
@@ -108,15 +44,73 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Update
+Provide a brief update about the incident
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Status
+Update status if needed
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -State
+Update state if needed
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -NotifySubscribers
+Send an email to subscribers
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
