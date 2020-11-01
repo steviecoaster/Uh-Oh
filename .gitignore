@@ -1,3 +1,4 @@
 .vscode/*
-Output/*.psm1
+./Output/*.psm1
 .DS_STORE
+./Output/Uh-Oh/Uh-Oh.psm1
