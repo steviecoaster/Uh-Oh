@@ -23,6 +23,7 @@ $sourcePath = Join-Path -Path $toolsDir -ChildPath "$modulename.zip"
     if (Test-Path -Path $destinationPath) {
         $null = New-Item -Path $destinationPath -ItemType Directory -Force
     }
+
     Get-ChocolateyUnzip -FileFullPath $sourcePath -Destination $destinationPath -PackageName $moduleName
 
     # save the locations where the module was installed so we can uninstall it

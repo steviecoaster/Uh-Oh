@@ -15,7 +15,7 @@
     <docsUrl>https://github.com/steviecoaster/Uh-Oh/tree/main/docs</docsUrl>
     <bugTrackerUrl>https://github.com/steviecoaster/Uh-Oh/issues</bugTrackerUrl>
     <tags>uh-oh powershell status staytus alert monitoring monitor alerting</tags>
-    <summary>Uh-Oh: The PowerShell module for Staytus!/summary>
+    <summary>Uh-Oh: The PowerShell module for Staytus!</summary>
     <description># Uh-Oh: The PowerShell module for Staytus!
 
 [Staytus](http://staytus.co/) is an awesome open-source status page software for notifying stakeholders of outages for services you provide.

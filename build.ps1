@@ -50,7 +50,7 @@ process {
             Update-ModuleManifest -Path "$root\Output\Uh-Oh\Uh-Oh.psd1" -ModuleVersion $NewVersion
 
             #Compress Module to zip file
-            Compress-Archive -Path $root\Output\Uh-Oh -DestinationPath "$root\src\nuget\tools\Uh-Oh.zip"
+            Compress-Archive -Path "$root\Output\Uh-Oh\Uh-Oh.psd1","$root\Output\Uh-Oh\Uh-Oh.psm1" -DestinationPath "$root\src\nuget\tools\Uh-Oh.zip"
 
         }
         $Test {
