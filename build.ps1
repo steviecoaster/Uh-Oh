@@ -70,6 +70,8 @@ process {
         }
 
         $Choco {
+            
+            $Nuspec = Get-ChildItem "$root\src\nuget" -recurse -filter *.nuspec
 
             if (Test-Path "$root\src\nuget\tools\Uh-Oh.zip") {
                 choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
