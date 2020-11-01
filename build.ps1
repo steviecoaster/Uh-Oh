@@ -74,17 +74,15 @@ process {
             $manifest = Import-PowerShellDataFile "$root\Output\Uh-Oh\Uh-Oh.psd1"
             $version = $Manifest.ModuleVersion
 
-            $version
-
             $Nuspec = Get-ChildItem "$root\src\nuget" -recurse -filter *.nuspec
 
-            $Nuspec
             (Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$version") | Set-Content "$($Nuspec.FullName)"
 
             choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
+            
             Get-ChildItem "$root\src\nuget" -recurse -filter *.nupkg | 
             Foreach-Object { 
-                $_.FullName#choco push $_.FullName -s https://push.chocolatey.org --api-key="'$($env:ChocoApiKey)'"
+               choco push $_.FullName -s https://push.chocolatey.org --api-key="'$($env:ChocoApiKey)'"
             }
 
         }
