@@ -6,7 +6,11 @@ param(
     
     [Parameter()]
     [Switch]
-    $Test,
+    $TestPrePublish,
+
+    [Parameter()]
+    [Switch]
+    $TestPostPublish,
 
     [Parameter()]
     [Switch]
@@ -66,7 +70,14 @@ process {
             Compress-Archive -Path "$root\Output\Uh-Oh\Uh-Oh.psd1", "$root\Output\Uh-Oh\Uh-Oh.psm1" -DestinationPath "$root\src\nuget\tools\Uh-Oh.zip"
         }
 
-        $Test {}
+        $TestPrePublish {
+            
+            Import-Module "$root\Output\Uh-Oh\Uh-Oh.psd1"
+            Invoke-Pester "$root\tests"
+            
+        }
+
+        $TestPostPublish {}
 
         $DeployToGallery {
 
