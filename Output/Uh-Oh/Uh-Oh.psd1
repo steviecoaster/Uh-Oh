@@ -15,7 +15,7 @@ RootModule = '.\Uh-Oh.psm1'
 ModuleVersion = '0.1.0'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+#CompatiblePSEditions = 
 
 # ID used to uniquely identify this module
 GUID = '4fe6ae66-3458-4751-80fe-76a9510b1881'

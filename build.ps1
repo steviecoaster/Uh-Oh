@@ -33,6 +33,8 @@ process {
 
         $Build {
 
+            Install-Module PowerShellGet -SkipPublisherCheck -Force
+            Import-Module PowerShellGet -MinimumVersion 2.2.3
             Get-ChildItem $root\src\public\*.ps1 | Foreach-Object { 
                 Get-Content $_.FullName | Add-Content "$root\Output\Uh-Oh\Uh-Oh.psm1"
             }
