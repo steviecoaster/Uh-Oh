@@ -54,14 +54,14 @@ process {
             Compress-Archive -Path "$root\Output\Uh-Oh\Uh-Oh.psd1","$root\Output\Uh-Oh\Uh-Oh.psm1" -DestinationPath "$root\src\nuget\tools\Uh-Oh.zip"
 
             #Publish pipeline artifacts
-            Copy-Item "$root\Output\" -Recurse -Destination $env:BuildArtifactStagingDirectory
+            #Copy-Item "$root\Output\" -Recurse -Destination $env:BuildArtifactStagingDirectory
         }
         $Test {
 
             Import-Module (Get-ChildItem $root -Recurse -Filter *.psd1).FullName -ErrorAction SilentlyContinue
 
             $error[0].Exception.GetBaseException()
-            
+
             Get-Command -module Uh-Oh
         }
 
