@@ -36,6 +36,11 @@ process {
             Foreach-Object { 
                 Get-Content $_.FullName | Add-Content "$root\Output\Uh-Oh\Uh-Oh.psm1"
             }
+
+            Get-ChildItem $root\Poshbot\*.ps1 |
+            Foreach-Object {
+                Get-Content $_.FullName | Add-Content "$root\Output\Uh-Oh\Uh-Oh.psm1"
+            }
             
             $manifest = Import-PowerShellDataFile "$root\Output\Uh-Oh\Uh-Oh.psd1"
 
