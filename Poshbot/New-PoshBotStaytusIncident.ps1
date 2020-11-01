@@ -32,7 +32,7 @@ Function New-PoshBotStaytusIncident {
     New-PoshBotStaytusIncident @IncidentParams
     #>
     [PoshBot.BotCommand(CommandName = 'NewStaytusIncident')]
-    [CmdletBinding(HelpUri="https://github.com/steviecoaster/Uh-Oh/blob/main/docs/New-PoshBotStaytusServer.md")]
+    [CmdletBinding(HelpUri="https://github.com/steviecoaster/Uh-Oh/blob/main/docs/New-PoshBotStaytusIncident.md")]
     Param(
         [Parameter(Mandatory)]
         [String]
