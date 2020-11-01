@@ -17,13 +17,13 @@ cd Uh-Oh
 Import-Module ./Output/Uh-Oh/Uh-Oh.psd1
 ```
 
-### PowerShell Gallery : COMING SOON
+### PowerShell Gallery
 
 ```powershell
 Install-Module Uh-Oh
 ```
 
-### Chocolatey : COMING SOON
+### Chocolatey : COMING SOON (In Moderation)
 
 ```powershell
 choco install uh-oh -y
