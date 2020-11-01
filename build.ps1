@@ -52,25 +52,18 @@ process {
 
             #Compress Module to zip file
             Compress-Archive -Path "$root\Output\Uh-Oh\Uh-Oh.psd1", "$root\Output\Uh-Oh\Uh-Oh.psm1" -DestinationPath "$root\src\nuget\tools\Uh-Oh.zip"
-
-            #Publish pipeline artifacts
-            #Copy-Item "$root\Output\" -Recurse -Destination $env:BuildArtifactStagingDirectory
         }
-        $Test {
 
-            Import-Module (Get-ChildItem $root -Recurse -Filter *.psd1).FullName -ErrorAction SilentlyContinue
-
-            $error[0].Exception.GetBaseException()
-
-            Get-Command -module Uh-Oh
-        }
+        $Test {}
 
         $DeployToGallery {
 
             Publish-Module -Path "$root\Output\Uh-Oh" -NuGetApiKey $env:NugetApiKey
+
         }
 
         $Choco {
+
             $manifest = Import-PowerShellDataFile "$root\Output\Uh-Oh\Uh-Oh.psd1"
             $version = $Manifest.ModuleVersion
 
@@ -78,14 +71,20 @@ process {
 
             (Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$version") | Set-Content "$($Nuspec.FullName)"
 
-            choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
-            
+            if(Test-Path "$root\src\nuget\tools\Uh-Oh.zip"){
+                choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
+            }
+
+            else {
+                throw "Welp, ya need the zip in the tools folder, dumby"
+            }
             Get-ChildItem "$root\src\nuget" -recurse -filter *.nupkg | 
             Foreach-Object { 
                choco push $_.FullName -s https://push.chocolatey.org --api-key="'$($env:ChocoApiKey)'"
             }
 
         }
+
     }
 
 }
