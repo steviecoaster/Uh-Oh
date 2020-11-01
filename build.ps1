@@ -73,14 +73,19 @@ process {
         $Choco {
             $manifest = Import-PowerShellDataFile "$root\Output\Uh-Oh\Uh-Oh.psd1"
             $version = $Manifest.ModuleVersion
-            $Nuspec = Get-ChildItem "$root\src\nuget" -recurse -filter *.nuspec
-            (Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$Version") | Set-Content "$Nuspec"
 
-            choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
-            Get-ChildItem "$root\src\nuget" -recurse -filter *.nupkg | 
-            Foreach-Object { 
-                choco push $_.FullName -s https://push.chocolatey.org --api-key="'$($env:ChocoApiKey)'"
-            }
+            $version
+
+            $Nuspec = Get-ChildItem "$root\src\nuget" -recurse -filter *.nuspec
+
+            $Nuspec
+            #(Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$Version") | Set-Content "$Nuspec"
+
+            #choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
+            #Get-ChildItem "$root\src\nuget" -recurse -filter *.nupkg | 
+            #Foreach-Object { 
+                #choco push $_.FullName -s https://push.chocolatey.org --api-key="'$($env:ChocoApiKey)'"
+            #å}
 
         }
     }
