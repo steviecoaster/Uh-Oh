@@ -2,10 +2,6 @@
 param(
     [Parameter()]
     [Switch]
-    $PrepEnvironment,
-
-    [Parameter()]
-    [Switch]
     $Build,
     
     [Parameter()]
@@ -25,27 +21,19 @@ process {
 
     $root = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
-    if (Test-Path "$root\Output") {
-        Remove-Item "$root\Output\Uh-Oh\*.psm1" -Recurse -Force
-    }
-
-    if (Test-Path "$root\src\nuget\tools\Uh-Oh.zip") {
-        Remove-Item "$root\src\nuget\tools\Uh-Oh.zip" -Force
-    }
-
     switch ($true) {
 
-        $PrepEnvironment {
-            Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-            Install-Module PowerShellGet -SkipPublisherCheck -Force
-            Import-Module PowerShellGet -MinimumVersion 2.2.3
-
-        }
         $Build {
+            if (Test-Path "$root\Output") {
+                Remove-Item "$root\Output\Uh-Oh\*.psm1" -Recurse -Force
+            }
+        
+            if (Test-Path "$root\src\nuget\tools\Uh-Oh.zip") {
+                Remove-Item "$root\src\nuget\tools\Uh-Oh.zip" -Force
+            }
             
-            $items = Get-ChildItem $root\src\public\*.ps1
-            $items
-            $items | Foreach-Object { 
+            Get-ChildItem $root\src\public\*.ps1 | 
+            Foreach-Object { 
                 Get-Content $_.FullName | Add-Content "$root\Output\Uh-Oh\Uh-Oh.psm1"
             }
             
@@ -62,6 +50,13 @@ process {
             # Update the manifest file
             Update-ModuleManifest -Path "$root\Output\Uh-Oh\Uh-Oh.psd1" -ModuleVersion $NewVersion
 
+            $manifest = Import-PowerShellDataFile "$root\Output\Uh-Oh\Uh-Oh.psd1"
+            $version = $Manifest.ModuleVersion
+
+            $Nuspec = Get-ChildItem "$root\src\nuget" -recurse -filter *.nuspec
+
+            (Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$version") | Set-Content "$($Nuspec.FullName)"
+
             #Compress Module to zip file
             Compress-Archive -Path "$root\Output\Uh-Oh\Uh-Oh.psd1", "$root\Output\Uh-Oh\Uh-Oh.psm1" -DestinationPath "$root\src\nuget\tools\Uh-Oh.zip"
         }
@@ -75,13 +70,6 @@ process {
         }
 
         $Choco {
-
-            $manifest = Import-PowerShellDataFile "$root\Output\Uh-Oh\Uh-Oh.psd1"
-            $version = $Manifest.ModuleVersion
-
-            $Nuspec = Get-ChildItem "$root\src\nuget" -recurse -filter *.nuspec
-
-            (Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$version") | Set-Content "$($Nuspec.FullName)"
 
             if (Test-Path "$root\src\nuget\tools\Uh-Oh.zip") {
                 choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
