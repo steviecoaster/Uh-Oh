@@ -79,13 +79,13 @@ process {
             $Nuspec = Get-ChildItem "$root\src\nuget" -recurse -filter *.nuspec
 
             $Nuspec
-            #(Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$Version") | Set-Content "$Nuspec"
+            (Get-Content "$($Nuspec.Fullname)").Replace('[[VERSION]]', "$version") | Set-Content "$($Nuspec.FullName)"
 
-            #choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
-            #Get-ChildItem "$root\src\nuget" -recurse -filter *.nupkg | 
-            #Foreach-Object { 
-                #choco push $_.FullName -s https://push.chocolatey.org --api-key="'$($env:ChocoApiKey)'"
-            #å}
+            choco pack $Nuspec.Fullname --output-directory $Nuspec.directory
+            Get-ChildItem "$root\src\nuget" -recurse -filter *.nupkg | 
+            Foreach-Object { 
+                $_.FullName#choco push $_.FullName -s https://push.chocolatey.org --api-key="'$($env:ChocoApiKey)'"
+            }
 
         }
     }
