@@ -9,22 +9,16 @@ Describe "Validating Working Online Help" {
     }
 }
 
+function Get-StaytusService{
+    param($Uri)
+
+    Invoke-RestMethod -Uri 'google.com'
+}
+
 Describe "Command returns expected output" {
     
-    BeforeAll {
-        $StaytusServer = '192.168.2.239'
-        $Global:StaytusConnection = @{
-                Hostname = "$($protocol)://$StaytusServer/api/v1"
-                Header   = @{
-                    'X-Auth-Token'  = (New-Guid).Guid
-                    'X-Auth-Secret' = (New-Guid).Guid
-                }
-            
-        }
-    }
-
-    Mock -ModuleName Uh-Oh -CommandName Invoke-RestMethod -MockWith {
-        return [pscustomobject]@{
+    Mock Invoke-RestMethod -MockWith {
+         $foo = [pscustomobject]@{
                id = 4
                name = 'Things'
                permalink = 'customer-support'
@@ -32,7 +26,7 @@ Describe "Command returns expected output" {
                description = $null
                created_at = (Get-Date).ToLongTimeString()
                updated_at = (Get-Date).ToLongTimeString()
-               status = @{
+               status = [pscustomobject]@{
                    id = 1
                    name = 'Operational'
                    permalink = 'Operational'
@@ -42,12 +36,37 @@ Describe "Command returns expected output" {
                    updated_at = (Get-Date).ToLongTimeString()
                }
         }
-    } -ParameterFilter { $Hostname -eq $StaytusServer}
 
-    
-    It "Should return a name" {
+        return $foo
+    } 
+
+    It "Returns a name" {
         $service = Get-StaytusService
+        $service.name | Should -Be 'Things'
+    }
 
-        $service.Name | Should -Be 'Things'
+    It "Has an id" {
+        $service = Get-StaytusService
+        $service.id | Should -Be 4
+    }
+
+    It "Has a permalink" {
+        $service = Get-StaytusService
+        $service.permalink | Should -Be 'customer-support'
+    }
+
+    It "Has a position" {
+        $service = Get-StaytusService
+        $service.position | Should -Be 4
+    }
+
+    It "Has a blank description" {
+        $service = Get-StaytusService
+        $service.description | Should -BeNullOrEmpty
+    }
+
+    It "Status is a pscustomobject" {
+        $service = Get-StaytusService
+        $service.status | Should -BeOfType "System.Management.Automation.PSCustomObject"
     }
 }
