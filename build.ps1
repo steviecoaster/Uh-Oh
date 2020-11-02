@@ -72,7 +72,10 @@ process {
 
         $TestPrePublish {
             
-            Import-Module "$root\Output\Uh-Oh\Uh-Oh.psd1"
+            Import-Module "$root\Output\Uh-Oh\Uh-Oh.psd1" -Force
+            Import-Module PoshBot -Force
+            Import-Module Pester -MinimumVersion 4.0.0
+
             Invoke-Pester "$root\tests"
             
         }

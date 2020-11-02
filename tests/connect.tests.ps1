@@ -12,6 +12,9 @@ Describe "Online Help Tests" {
 
 Describe -Name 'Connect-StaytusServer Tests' -Fixture {
 
+    BeforeAll{
+        $Credential = [pscredential]::new('fakeuser',('string'| ConvertTo-SecureString -AsPlainText -Force))
+    }
     Context 'Verifying connection function' {
 
         It 'Credential is the right type' {
