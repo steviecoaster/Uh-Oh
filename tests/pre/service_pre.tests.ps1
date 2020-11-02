@@ -1,4 +1,4 @@
-$incidentCommands = Get-Command -Module Uh-Oh | Where-Object { $_.Name -match "Service" }
+$incidentCommands = Get-Command | Where-Object { $_.Name -match "StaytusService" }
 
 
 Describe "Validating Working Online Help" {

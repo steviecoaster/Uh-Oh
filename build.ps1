@@ -28,6 +28,9 @@ process {
     switch ($true) {
 
         $Build {
+
+            Install-Module PoshBot -Force -SkipPublisherCheck
+            Import-Module PoshBot
             if (Test-Path "$root\Output") {
                 Remove-Item "$root\Output\Uh-Oh\*.psm1" -Recurse -Force
             }
@@ -72,12 +75,24 @@ process {
 
         $TestPrePublish {
             
-            Import-Module "$root\Output\Uh-Oh\Uh-Oh.psd1"
-            Invoke-Pester "$root\tests"
+            Get-ChildItem $root\src\public\*.ps1, $root\Poshbot\*.ps1 | 
+            Foreach-Object { 
+                . $_.FullName
+            }
+            #Import-Module "$root\Output\Uh-Oh\Uh-Oh.psd1" -Force
+            Import-Module PoshBot -Force
+
+            Invoke-Pester "$root\tests\pre"
             
         }
 
-        $TestPostPublish {}
+        $TestPostPublish {
+
+            Install-Module Uh-Oh -Force
+            Import-Module PoshBot -Force
+
+            Invoke-Pester "$root\tests\*.ps1"
+        }
 
         $DeployToGallery {
 
