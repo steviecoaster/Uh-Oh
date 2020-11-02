@@ -1,0 +1,33 @@
+$incidentCommands = Get-Command | Where-Object { $_.Name -match "StaytusServer" }
+
+
+Describe "Online Help Tests" {
+    Foreach ($command in $incidentCommands) {
+        It "$($command.Name) Online Help resolves" {
+            (Invoke-WebRequest $command.HelpUri).StatusCode | Should -Be 200
+        }
+    }
+}
+
+
+Describe -Name 'Connect-StaytusServer Tests' -Fixture {
+
+    BeforeAll{
+        $Credential = [pscredential]::new('fakeuser',('string'| ConvertTo-SecureString -AsPlainText -Force))
+    }
+    Context 'Verifying connection function' {
+
+        It 'Credential is the right type' {
+
+            $Credential | Should -BeOfType "System.Management.Automation.PSCredential"
+
+        }
+
+        It 'Accepts a PSCredential Object' {
+            # Act
+            { Connect-StaytusServer -StaytusServer staytus.contoso.com -Credential $Credential } | Should -Not -Throw
+            # Assert
+        }
+        
+    }
+}
