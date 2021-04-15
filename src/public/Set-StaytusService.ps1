@@ -16,7 +16,7 @@ Function Set-StaytusService {
     Set-StaytusService -Service 'Storefront' -Status operational
 
     #>
-    [cmdletBinding(HelpUri = "https://github.com/steviecoaster/Uh-Oh/blob/main/docs/Get-StaytusService.md")]
+    [cmdletBinding(HelpUri = "https://github.com/steviecoaster/Uh-Oh/blob/main/docs/Set-StaytusService.md")]
     Param(
         [Parameter(Mandatory)]
         [ArgumentCompleter(
@@ -41,7 +41,16 @@ Function Set-StaytusService {
             'partial-outage',
             'maintenance')]
         [String]
-        $Status
+        $Status,
+
+        [Parameter()]
+        [ValidateScript(
+            {
+                Test-Path $PSItem
+            }
+        )]
+        [String]
+        $File
     )
 
     begin {
@@ -69,3 +78,4 @@ Function Set-StaytusService {
     }
     
 }
+
